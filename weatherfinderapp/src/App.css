@@ -1,21 +1,30 @@
-body{
-  background-color: aliceblue;
+
+body {
+  min-height: 100vh;
+  background: #601629;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 h1{
   text-align: center;
-  color: black;
+  color: rgb(255, 255, 255);
   font-family: 'Arial', sans-serif;
   margin: 5%;
 }
 
 .App{
-  width: 400px;
-  padding: 10px;
-  margin: 100px auto;
-  background-color: rgb(209, 220, 220);
-  border: 1px solid black;
-  border-radius: 8px;
+  width: 360px;
+  padding: 30px;
+  border-radius: 20px;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 183, 3, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
 }
 
 .error{
@@ -40,12 +49,20 @@ input{
 }
 
 button{
-  padding: 10px 20px;
-  margin: 5px;
-  background-color: rgb(255, 255, 255);
-  border: 1px solid black;
-  border-radius: 8px;
+  height: 40px;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
+  font-weight: bold;
+  background: linear-gradient(45deg, #755913, #fb8500);
+  color: white;
+  margin: 5px;
+}
+
+button:hover {
+  transform: scale(1.1);
+  background: #5471f2;
 }
 
 .display{

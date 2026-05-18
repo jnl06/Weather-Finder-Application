@@ -7,7 +7,7 @@ const App = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const API_KEY = "ebffee8a251dac8a6101e0464f3c592f";
+  const API_KEY = process.env.REACT_APP_API_KEY;
 
   const getWeather = async () => {
     if (!city) {
@@ -23,13 +23,17 @@ const App = () => {
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
       );
 
-      if (!response.ok) {
+      const data = await response.json();
+
+      if (response.status === 404) {
         throw new Error("City not found");
       }
 
-      const data = await response.json();
+      if (response.status === 429) {
+        throw new Error("Too many requests. Try again later");
+      }
+
       setWeather(data);
-      setError(null);
     } catch (err) {
       setWeather(null);
       setError(err.message);
@@ -37,14 +41,11 @@ const App = () => {
       setLoading(false);
     }
   };
-  
-  if (loading) <p>Loading...</p>;
-  if (error) <p>City not found: {error}</p>;
 
   return (
     <div className='App'>
       <h1>Weather Finder App</h1>
-      
+
       <div className='input'>
         <input
           type="text"
@@ -52,11 +53,20 @@ const App = () => {
           value={city}
           onChange={(e) => setCity(e.target.value)}
         />
-        <button onClick={getWeather}>Get Weather</button>
+
+        <button onClick={getWeather}>
+          Get Weather
+        </button>
       </div>
-      <div className='error'>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-      </div>
+
+      {loading && <h2>Loading...</h2>}
+
+      {error && (
+        <p style={{ color: "red" }}>
+          {error}
+        </p>
+      )}
+
       {weather && (
         <div className='display'>
           <h2>{weather.name}</h2>
@@ -64,7 +74,6 @@ const App = () => {
           <p>{weather.weather[0].description}</p>
         </div>
       )}
-      
     </div>
   );
 };
