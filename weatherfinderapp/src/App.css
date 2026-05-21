@@ -69,8 +69,18 @@ button:hover {
   width: 300px;
   padding: 15px;
   margin: 20px auto;
-  background-color: rgb(142, 218, 211);
+  background-color: #fb860064;
   border: 1px solid black;
   border-radius: 8px;
   text-align: center;
+}
+
+.display h2{
+  margin: 0;
+  font-size: 24px;
+}
+
+.display p{
+  margin: 15px 0;
+  font-size: 18px;
 }
